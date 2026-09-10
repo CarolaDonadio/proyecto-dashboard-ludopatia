@@ -8,16 +8,24 @@ const seccionSi = document.getElementById('seccion-si');
 const seccionNo = document.getElementById('seccion-no');
 const form = document.getElementById('form-ludopatia');
 
+function actualizarRamaActiva(valor) {
+  const ramaSiActiva = valor === 'Sí';
+  const ramaNoActiva = valor === 'No';
+
+  seccionSi.classList.toggle('hidden', !ramaSiActiva);
+  seccionNo.classList.toggle('hidden', !ramaNoActiva);
+
+  seccionSi.querySelectorAll('select').forEach((campo) => {
+    campo.required = ramaSiActiva;
+  });
+  seccionNo.querySelectorAll('select').forEach((campo) => {
+    campo.required = ramaNoActiva;
+  });
+}
+
 // Mostrar u ocultar preguntas dinámicamente según la respuesta 3
 selectAposto.addEventListener('change', (e) => {
-  const valor = e.target.value;
-  if (valor === 'Sí') {
-    seccionSi.classList.remove('hidden');
-    seccionNo.classList.add('hidden');
-  } else if (valor === 'No') {
-    seccionNo.classList.remove('hidden');
-    seccionSi.classList.add('hidden');
-  }
+  actualizarRamaActiva(e.target.value);
 });
 
 form.addEventListener('submit', async (e) => {
@@ -50,6 +58,11 @@ form.addEventListener('submit', async (e) => {
       document.querySelectorAll('input[name="juegos"]:checked')
     ).map(cb => cb.value);
 
+    if (juegosSeleccionados.length === 0) {
+      alert('Selecciona al menos un tipo de juego.');
+      return;
+    }
+
     respuestaData.detalle_si = {
       tiempo_apostando: document.getElementById('si_tiempo').value,
       familia_sabe: document.getElementById('si_familia_sabe').value,
@@ -75,8 +88,7 @@ form.addEventListener('submit', async (e) => {
     form.reset();
     
     // Ocultar las ramas condicionales al reiniciar el formulario
-    seccionSi.classList.add('hidden');
-    seccionNo.classList.add('hidden');
+    actualizarRamaActiva('');
     
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Enviar Encuesta Anónima';

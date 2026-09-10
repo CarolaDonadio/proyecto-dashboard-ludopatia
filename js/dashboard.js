@@ -31,6 +31,7 @@ async function cargarYRenderizarDatos() {
     renderizarGraficoEdad(encuestas);
     renderizarGraficoSexo(encuestas);
     renderizarGraficoAposto(encuestas);
+    renderizarDetalles(encuestas);
   } catch (error) {
     console.error("Error al cargar datos del dashboard:", error);
   }
@@ -106,5 +107,67 @@ function renderizarGraficoAposto(datos) {
       }]
     },
     options: { responsive: true }
+  });
+}
+
+const preguntasNo = [
+  ['penso_hacerlo', '¿Alguna vez pensaste hacerlo?'],
+  ['lo_haria_futuro', '¿Lo harías en el futuro?'],
+  ['motivo_no_apostar', '¿Por qué decidís no apostar?'],
+  ['conoce_alguien_que_apueste', '¿Conoces alguien que apueste?']
+];
+
+const preguntasSi = [
+  ['tiempo_apostando', '¿Hace cuánto lo haces?'],
+  ['familia_sabe', '¿Tu familia sabe que apuestas?'],
+  ['motivo_inicio', '¿Por qué empezaste a jugar?'],
+  ['origen_dinero', '¿Cómo conseguiste el dinero para apostar?'],
+  ['monto_por_juego', '¿Qué cantidad apuestas cada vez que juegas?'],
+  ['horas_semanales', '¿Cuántas horas juegas por semana?'],
+  ['juegos_habituales', '¿En cuáles apuestas habitualmente?'],
+  ['destino_ganancia', 'Si ganas, ¿qué haces con el dinero?'],
+  ['conciencia_balance', '¿Sabes cuánto ganaste y cuánto perdiste?']
+];
+
+function renderizarDetalles(datos) {
+  renderizarPreguntas('graficos-no', datos.filter(d => d.aposto === 'No'), 'detalle_no', preguntasNo);
+  renderizarPreguntas('graficos-si', datos.filter(d => d.aposto === 'Sí'), 'detalle_si', preguntasSi);
+}
+
+function renderizarPreguntas(contenedorId, datos, detalleKey, preguntas) {
+  const contenedor = document.getElementById(contenedorId);
+
+  preguntas.forEach(([campo, titulo], indice) => {
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    card.innerHTML = `<h3>${titulo}</h3><canvas id="${contenedorId}-${indice}"></canvas>`;
+    contenedor.appendChild(card);
+
+    const conteos = {};
+    datos.forEach((encuesta) => {
+      const respuesta = encuesta[detalleKey]?.[campo];
+      const valores = Array.isArray(respuesta) ? respuesta : [respuesta];
+      valores.filter(Boolean).forEach((valor) => {
+        conteos[valor] = (conteos[valor] || 0) + 1;
+      });
+    });
+
+    const canvas = card.querySelector('canvas');
+    new Chart(canvas.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: Object.keys(conteos),
+        datasets: [{
+          label: 'Cantidad de respuestas',
+          data: Object.values(conteos),
+          backgroundColor: '#0284c7'
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+      }
+    });
   });
 }
