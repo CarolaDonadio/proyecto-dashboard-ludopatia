@@ -1,0 +1,1 @@
+// Lógica para capturar y enviar datos a Firestore

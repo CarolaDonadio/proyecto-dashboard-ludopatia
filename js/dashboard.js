@@ -1,0 +1,1 @@
+// Lógica para leer datos y renderizar los gráficos
