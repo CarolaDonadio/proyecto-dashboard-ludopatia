@@ -1,1 +1,39 @@
 <!--Pantalla de inicio de sesión del administrador-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Administrador - Dashboard Ludopatía</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container container-login">
+    <h2>Acceso Administrador</h2>
+    <p class="subtitle">Ingresa tus credenciales para acceder al panel de control.</p>
+
+    <!-- Mensaje de error oculto por defecto -->
+    <div id="error-message" class="error-box hidden"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" placeholder="admin@ejemplo.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" id="btn-login">Iniciar Sesión</button>
+    </form>
+
+    <div class="login-footer">
+      <a href="index.html">← Volver al Formulario Anónimo</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

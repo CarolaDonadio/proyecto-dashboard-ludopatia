@@ -1,0 +1,142 @@
+:root {
+  --primary-blue: #0d47a1;
+  --secondary-blue: #1976d2;
+  --light-blue: #e3f2fd;
+  --border-blue: #90caf9;
+  --hover-blue: #1565c0;
+  --text-color: #1a237e;
+  --white: #ffffff;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-blue);
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.15);
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  border-top: 6px solid var(--primary-blue);
+}
+
+h2 {
+  color: var(--primary-blue);
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: var(--secondary-blue);
+  font-size: 0.9em;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+select, input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-blue);
+  border-radius: 6px;
+  background-color: #f1f8fe;
+  font-size: 0.95em;
+  box-sizing: border-box;
+}
+
+select:focus, input:focus {
+  outline: none;
+  border-color: var(--secondary-blue);
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #f1f8fe;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-blue);
+}
+
+.checkbox-group label {
+  font-weight: normal;
+  color: #333;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  width: 100%;
+  background-color: var(--secondary-blue);
+  color: var(--white);
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--hover-blue);
+}
+
+
+
+/* --- Estilos para el Login y Navegación --- */
+.container-login {
+  max-width: 400px;
+  margin-top: 40px;
+}
+
+.error-box {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-footer a {
+  color: var(--secondary-blue);
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.login-footer a:hover {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}

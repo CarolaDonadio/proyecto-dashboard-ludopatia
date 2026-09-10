@@ -1,1 +1,174 @@
 <!--Formulario anónimo para adolescentes-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta Anónima - Ludopatía en Adolescentes</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Encuesta: Ludopatía en Adolescentes</h2>
+    <p class="subtitle">Esta encuesta es 100% anónima. Tus respuestas ayudarán a nuestro estudio.</p>
+
+    <form id="form-ludopatia">
+      <!-- 1. Edad -->
+      <div class="form-group">
+        <label>1. Edad:</label>
+        <select id="edad" required>
+          <option value="" disabled selected>Selecciona tu edad</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+        </select>
+      </div>
+
+      <!-- 2. Sexo -->
+      <div class="form-group">
+        <label>2. Sexo:</label>
+        <select id="sexo" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <!-- 3. ¿Alguna vez apostaste? -->
+      <div class="form-group">
+        <label>3. ¿Alguna vez apostaste en juegos online?:</label>
+        <select id="aposto" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- RAMA: RESPUESTA "NO" -->
+      <div id="seccion-no" class="hidden">
+        <div class="form-group">
+          <label>3.1. ¿Alguna vez pensaste hacerlo?</label>
+          <select id="no_penso">
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.2. ¿Lo harías en el futuro?</label>
+          <select id="no_futuro">
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+            <option value="No sé">No sé</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.3. ¿Por qué decidís no apostar?</label>
+          <select id="no_motivo">
+            <option value="Por falta de dinero">Por falta de dinero</option>
+            <option value="Porque no me dejan">Porque no me dejan</option>
+            <option value="Por miedo a perder plata">Por miedo a perder plata</option>
+            <option value="Porque sé que genera adicción">Porque sé que genera adicción</option>
+            <option value="No me gusta">No me gusta</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.4. ¿Conoces alguien que apueste?</label>
+          <select id="no_conoce">
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- RAMA: RESPUESTA "SÍ" -->
+      <div id="seccion-si" class="hidden">
+        <div class="form-group">
+          <label>3.1. ¿Hace cuánto lo haces?</label>
+          <select id="si_tiempo">
+            <option value="Menos de 1 año">Menos de 1 año</option>
+            <option value="Más de 1 año">Más de 1 año</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.2. ¿Tu familia sabe que apostas?:</label>
+          <select id="si_familia_sabe">
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+            <option value="No sé">No sé</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.3. ¿Por qué empezaste a jugar?</label>
+          <select id="si_motivo">
+            <option value="Recomendación de un amigo">Recomendación de un amigo</option>
+            <option value="Recomendación de un familiar">Recomendación de un familiar</option>
+            <option value="Anuncio / Publicidad">Anuncio / Publicidad</option>
+            <option value="Famoso / Influencer">Famoso / Influencer</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.4. ¿Cómo conseguiste el dinero para apostar?</label>
+          <select id="si_origen_dinero">
+            <option value="Asignación (Beca Alimentar)">Asignación (Beca Alimentar)</option>
+            <option value="Familiares">Familiares</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.5. ¿Qué cantidad de dinero apostas cada vez que jugas?</label>
+          <select id="si_monto">
+            <option value="de $1.000 a $5.000">de $1.000 a $5.000</option>
+            <option value="de $5.000 a $10.000">de $5.000 a $10.000</option>
+            <option value="Más de $10.000">Más de $10.000</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.6. ¿Cuántas horas jugas por semana?</label>
+          <select id="si_horas">
+            <option value="Menos de 3 horas">Menos de 3 horas</option>
+            <option value="Entre 3 y 7 horas">Entre 3 y 7 horas</option>
+            <option value="Entre 7 y 14 horas">Entre 7 y 14 horas</option>
+            <option value="Más de 14 horas">Más de 14 horas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.7. ¿En cuáles apostas habitualmente? (Puedes marcar varias):</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="juegos" value="Ruletas"> Ruletas</label>
+            <label><input type="checkbox" name="juegos" value="Jokers"> Jokers</label>
+            <label><input type="checkbox" name="juegos" value="Apuesta deportiva"> Apuesta deportiva</label>
+            <label><input type="checkbox" name="juegos" value="Poker"> Poker</label>
+            <label><input type="checkbox" name="juegos" value="Otros"> Otros</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>3.8. Si ganas, ¿qué haces con el dinero?</label>
+          <select id="si_destino_ganancia">
+            <option value="Salidas">Salidas</option>
+            <option value="Compras">Compras</option>
+            <option value="Lo vuelvo a apostar">Lo vuelvo a apostar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>3.9. ¿Sabes cuánto dinero ganaste y cuánto perdiste?</label>
+          <select id="si_balance">
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit">Enviar Encuesta Anónima</button>
+    </form>
+  </div>
+
+  <script type="module" src="js/form.js"></script>
+</body>
+</html>
