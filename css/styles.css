@@ -1,142 +1,286 @@
+/* --- Variables de Diseño y Paleta Azul --- */
 :root {
-  --primary-blue: #0d47a1;
-  --secondary-blue: #1976d2;
-  --light-blue: #e3f2fd;
-  --border-blue: #90caf9;
-  --hover-blue: #1565c0;
-  --text-color: #1a237e;
-  --white: #ffffff;
+  --bg-main: #f4f7fb;
+  --bg-card: #ffffff;
+  --primary: #0284c7;        /* Azul vibrante principal */
+  --primary-hover: #0369a1;  /* Azul oscuro para interacciones */
+  --text-dark: #0f172a;      /* Azul muy oscuro para títulos/texto */
+  --text-muted: #64748b;     /* Gris azulado para subtítulos */
+  --border-color: #e2e8f0;   /* Bordes sutiles */
+  --accent-light: #f0f9ff;   /* Fondo tenue para campos y cajas */
+  --accent-border: #bae6fd;  /* Borde activo */
+  --danger: #ef4444;         /* Rojo suave para errores/logout */
+  --danger-hover: #dc2626;
+  --radius: 12px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(14, 165, 233, 0.08), 0 4px 6px -4px rgba(14, 165, 233, 0.05);
+}
+
+/* --- Reset Global --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--light-blue);
-  color: #333;
-  margin: 0;
-  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  padding: 20px 16px;
 }
 
+/* --- Contenedor Principal (Formulario y Login) --- */
 .container {
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.15);
-  max-width: 600px;
+  background-color: var(--bg-card);
   width: 100%;
-  padding: 30px;
-  border-top: 6px solid var(--primary-blue);
+  max-width: 580px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  padding: 36px 28px;
+  margin: 20px auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.container-login {
+  max-width: 420px;
+}
+
+/* --- Tipografía --- */
 h2 {
-  color: var(--primary-blue);
-  margin-top: 0;
-  margin-bottom: 5px;
+  color: var(--text-dark);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  text-align: center;
 }
 
 .subtitle {
-  color: var(--secondary-blue);
-  font-size: 0.9em;
-  margin-bottom: 25px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  text-align: center;
+  margin-bottom: 32px;
 }
 
+/* --- Formularios y Entradas --- */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 label {
   display: block;
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-dark);
   margin-bottom: 8px;
 }
 
-select, input[type="text"] {
+select, 
+input[type="email"], 
+input[type="password"], 
+input[type="text"] {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--border-blue);
-  border-radius: 6px;
-  background-color: #f1f8fe;
-  font-size: 0.95em;
-  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--accent-light);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%200284c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  transition: all 0.2s ease;
 }
 
-select:focus, input:focus {
+input[type="email"], 
+input[type="password"], 
+input[type="text"] {
+  background-image: none;
+}
+
+select:focus, 
+input:focus {
   outline: none;
-  border-color: var(--secondary-blue);
-  box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+  border-color: var(--primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 }
 
+/* --- Grupos de Checkbox --- */
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background-color: #f1f8fe;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border-blue);
+  gap: 10px;
+  background-color: var(--accent-light);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
 }
 
 .checkbox-group label {
-  font-weight: normal;
-  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 400;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
+/* --- Botones --- */
 button {
   width: 100%;
-  background-color: var(--secondary-blue);
-  color: var(--white);
+  background-color: var(--primary);
+  color: #ffffff;
   border: none;
   padding: 14px;
-  border-radius: 6px;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: var(--shadow);
+  margin-top: 10px;
 }
 
 button:hover {
-  background-color: var(--hover-blue);
+  background-color: var(--primary-hover);
 }
 
+button:active {
+  transform: scale(0.99);
+}
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
-/* --- Estilos para el Login y Navegación --- */
-.container-login {
-  max-width: 400px;
-  margin-top: 40px;
+/* --- Layout del Dashboard --- */
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto 28px auto;
+  gap: 16px;
+}
+
+.dashboard-header h2 {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.chart-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card h3 {
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px;
+}
+
+.btn-secondary {
+  background-color: var(--danger);
+  width: auto;
+  padding: 10px 20px;
+  margin-top: 0;
+}
+
+.btn-secondary:hover {
+  background-color: var(--danger-hover);
+}
+
+/* --- Estados y Utilidades --- */
+.hidden {
+  display: none !important;
 }
 
 .error-box {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 0.9em;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .login-footer {
-  margin-top: 20px;
+  margin-top: 24px;
   text-align: center;
 }
 
 .login-footer a {
-  color: var(--secondary-blue);
+  color: var(--primary);
   text-decoration: none;
-  font-size: 0.9em;
-  font-weight: 600;
-  transition: color 0.2s;
+  font-size: 0.88rem;
+  font-weight: 500;
 }
 
 .login-footer a:hover {
-  color: var(--primary-blue);
   text-decoration: underline;
+}
+
+/* --- Adaptación Responsive (Móviles) --- */
+@media (max-width: 640px) {
+  body {
+    padding: 12px;
+  }
+
+  .container {
+    padding: 24px 18px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
 }

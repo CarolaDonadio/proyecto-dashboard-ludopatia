@@ -1,1 +1,40 @@
 <!--Panel de control con gráficos-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control - Ludopatía en Adolescentes</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Carga de la librería Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-header">
+    <h2>Panel de Control - Análisis de Datos</h2>
+    <button id="logout-btn" class="btn-secondary">Cerrar Sesión</button>
+  </div>
+
+  <div class="dashboard-container">
+    <!-- Tarjeta 1: Edad de los encuestados -->
+    <div class="chart-card">
+      <h3>Distribución por Edad</h3>
+      <canvas id="chart-edad"></canvas>
+    </div>
+
+    <!-- Tarjeta 2: Distribución por Sexo -->
+    <div class="chart-card">
+      <h3>Distribución por Sexo</h3>
+      <canvas id="chart-sexo"></canvas>
+    </div>
+
+    <!-- Tarjeta 3: ¿Han apostado alguna vez? -->
+    <div class="chart-card">
+      <h3>Proporción de Apuestas en Adolescentes</h3>
+      <canvas id="chart-aposto"></canvas>
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

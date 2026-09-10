@@ -8,12 +8,13 @@ const seccionSi = document.getElementById('seccion-si');
 const seccionNo = document.getElementById('seccion-no');
 const form = document.getElementById('form-ludopatia');
 
-// Mostrar u ocultar preguntas condicionalmente según la respuesta
+// Mostrar u ocultar preguntas dinámicamente según la respuesta 3
 selectAposto.addEventListener('change', (e) => {
-  if (e.target.value === 'Sí') {
+  const valor = e.target.value;
+  if (valor === 'Sí') {
     seccionSi.classList.remove('hidden');
     seccionNo.classList.add('hidden');
-  } else if (e.target.value === 'No') {
+  } else if (valor === 'No') {
     seccionNo.classList.remove('hidden');
     seccionSi.classList.add('hidden');
   }
@@ -23,49 +24,67 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const aposto = selectAposto.value;
-  
-  // Construcción del objeto anónimo de datos
+
+  // 1. Capturar datos base obligatorios (Preguntas 1, 2 y 3)
   const respuestaData = {
-    edad: parseInt(document.getElementById('edad').value),
+    edad: parseInt(document.getElementById('edad').value, 10),
     sexo: document.getElementById('sexo').value,
     aposto: aposto,
-    fecha: serverTimestamp() // Registro de fecha de envío
+    fecha_envio: serverTimestamp() // Registro de auditoría anónimo
   };
 
+  // 2. Capturar rama de respuestas para "NO"
   if (aposto === 'No') {
     respuestaData.detalle_no = {
       penso_hacerlo: document.getElementById('no_penso').value,
-      haría_en_futuro: document.getElementById('no_futuro').value,
+      lo_haria_futuro: document.getElementById('no_futuro').value,
       motivo_no_apostar: document.getElementById('no_motivo').value,
-      conoce_alguien: document.getElementById('no_conoce').value
+      conoce_alguien_que_apueste: document.getElementById('no_conoce').value
     };
-  } else if (aposto === 'Sí') {
-    // Capturar checkboxes seleccionados
-    const juegosChecked = Array.from(document.querySelectorAll('input[name="juegos"]:checked'))
-                               .map(cb => cb.value);
+  }
+
+  // 3. Capturar rama de respuestas para "SÍ"
+  if (aposto === 'Sí') {
+    // Capturar selección múltiple de juegos
+    const juegosSeleccionados = Array.from(
+      document.querySelectorAll('input[name="juegos"]:checked')
+    ).map(cb => cb.value);
 
     respuestaData.detalle_si = {
-      tiempo_jugando: document.getElementById('si_tiempo').value,
+      tiempo_apostando: document.getElementById('si_tiempo').value,
       familia_sabe: document.getElementById('si_familia_sabe').value,
       motivo_inicio: document.getElementById('si_motivo').value,
       origen_dinero: document.getElementById('si_origen_dinero').value,
       monto_por_juego: document.getElementById('si_monto').value,
       horas_semanales: document.getElementById('si_horas').value,
-      juegos_habituales: juegosChecked,
+      juegos_habituales: juegosSeleccionados, // Array con los juegos marcados
       destino_ganancia: document.getElementById('si_destino_ganancia').value,
-      balance_ganancia_perdida: document.getElementById('si_balance').value
+      conciencia_balance: document.getElementById('si_balance').value
     };
   }
 
+  // 4. Envío anónimo a Firestore
   try {
-    // Guardar respuesta anónima en la colección 'encuestas'
+    const btnSubmit = document.getElementById('btn-submit');
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Enviando...';
+
     await addDoc(collection(db, "encuestas"), respuestaData);
+
     alert("¡Muchas gracias! Tu respuesta anónima ha sido registrada.");
     form.reset();
+    
+    // Ocultar las ramas condicionales al reiniciar el formulario
     seccionSi.classList.add('hidden');
     seccionNo.classList.add('hidden');
+    
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = 'Enviar Encuesta Anónima';
   } catch (error) {
-    console.error("Error al registrar la encuesta: ", error);
-    alert("Hubo un error al enviar tu respuesta. Por favor intenta de nuevo.");
+    console.error("Error al enviar la respuesta:", error);
+    alert("Ocurrió un error al guardar la encuesta. Por favor, vuelve a intentarlo.");
+    
+    document.getElementById('btn-submit').disabled = false;
+    document.getElementById('btn-submit').textContent = 'Enviar Encuesta Anónima';
   }
 });
