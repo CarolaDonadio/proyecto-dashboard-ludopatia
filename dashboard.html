@@ -8,14 +8,36 @@
   <link rel="stylesheet" href="css/styles.css">
   <!-- Carga de la librería Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
   <div class="dashboard-header">
-    <h2>Panel de Control - Análisis de Datos</h2>
-    <button id="logout-btn" class="btn-secondary">Cerrar Sesión</button>
+    <div>
+      <p class="dashboard-eyebrow">Estudio de ciencia de datos</p>
+      <h1>Panorama de apuestas online en adolescentes</h1>
+      <p class="dashboard-summary">Lectura general de las respuestas anónimas para identificar hábitos, niveles de exposición y señales de riesgo vinculadas a la ludopatía.</p>
+    </div>
+    <div class="dashboard-actions">
+      <button id="export-btn" class="btn-export" type="button" disabled>Exportar Excel</button>
+      <button id="logout-btn" class="btn-secondary">Cerrar Sesión</button>
+    </div>
   </div>
 
   <div class="dashboard-container">
+    <section class="kpi-grid" aria-label="Indicadores principales">
+      <article class="kpi-card kpi-card-primary"><span class="kpi-label">Respuestas registradas</span><strong id="kpi-total">0</strong><span class="kpi-note">participaciones anónimas</span></article>
+      <article class="kpi-card"><span class="kpi-label">Han apostado</span><strong id="kpi-aposto">0%</strong><span class="kpi-note">del total encuestado</span></article>
+      <article class="kpi-card"><span class="kpi-label">No han apostado</span><strong id="kpi-no-aposto">0%</strong><span class="kpi-note">del total encuestado</span></article>
+      <article class="kpi-card"><span class="kpi-label">Edad más frecuente</span><strong id="kpi-edad">-</strong><span class="kpi-note">grupo con más respuestas</span></article>
+      <article class="kpi-card"><span class="kpi-label">Familia informada</span><strong id="kpi-familia">0%</strong><span class="kpi-note">entre quienes apostaron</span></article>
+      <article class="kpi-card"><span class="kpi-label">Más de 14 horas</span><strong id="kpi-horas">0%</strong><span class="kpi-note">entre quienes apostaron</span></article>
+    </section>
+
+    <section class="dashboard-section response-log">
+      <div class="section-heading"><div><p class="dashboard-eyebrow">Registro de actividad</p><h2>Últimas respuestas recibidas</h2></div><span id="table-count" class="table-count">0 registros</span></div>
+      <div class="table-wrapper"><table><thead><tr><th>Fecha</th><th>Edad</th><th>Sexo</th><th>¿Ha apostado?</th><th>Situación</th></tr></thead><tbody id="responses-table-body"><tr><td colspan="5" class="empty-state">Cargando respuestas...</td></tr></tbody></table></div>
+    </section>
+
     <!-- Tarjeta 1: Edad de los encuestados -->
     <div class="chart-card">
       <h3>Distribución por Edad</h3>
