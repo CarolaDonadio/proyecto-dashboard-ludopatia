@@ -180,6 +180,19 @@
     </form>
   </div>
 
+  <div id="success-popup-overlay" class="success-popup-overlay" aria-hidden="true">
+    <div class="success-popup" role="alertdialog" aria-modal="true" aria-labelledby="success-popup-title">
+      <div class="success-popup-icon" aria-hidden="true">⚠️</div>
+      <h3 id="success-popup-title">¡Tu encuesta fue enviada con éxito!</h3>
+      <p>Gracias por compartir tu experiencia. Tu respuesta quedó registrada de forma anónima.</p>
+      <div class="success-popup-warning">
+        <strong>Concientización:</strong> La ludopatía puede afectar la salud, el dinero, las relaciones y el bienestar emocional. Si sentís que el juego está tomando control, pedí ayuda. No estás solo/a.
+      </div>
+      <p class="success-popup-contact">Línea de ayuda: <a href="tel:08001234567">0800 123 4567</a></p>
+      <button type="button" id="close-success-popup" class="btn-close-popup">Cerrar</button>
+    </div>
+  </div>
+
   <script type="module" src="js/form.js"></script>
 </body>
 </html>

@@ -7,6 +7,31 @@ const selectAposto = document.getElementById('aposto');
 const seccionSi = document.getElementById('seccion-si');
 const seccionNo = document.getElementById('seccion-no');
 const form = document.getElementById('form-ludopatia');
+const successPopup = document.getElementById('success-popup-overlay');
+const closeSuccessPopupButton = document.getElementById('close-success-popup');
+
+function mostrarPopupExito() {
+  if (!successPopup) return;
+
+  successPopup.classList.add('visible');
+  successPopup.setAttribute('aria-hidden', 'false');
+}
+
+function ocultarPopupExito() {
+  if (!successPopup) return;
+
+  successPopup.classList.remove('visible');
+  successPopup.setAttribute('aria-hidden', 'true');
+}
+
+if (closeSuccessPopupButton && successPopup) {
+  closeSuccessPopupButton.addEventListener('click', ocultarPopupExito);
+  successPopup.addEventListener('click', (event) => {
+    if (event.target === successPopup) {
+      ocultarPopupExito();
+    }
+  });
+}
 
 function actualizarRamaActiva(valor) {
   const ramaSiActiva = valor === 'Sí';
@@ -84,12 +109,12 @@ form.addEventListener('submit', async (e) => {
 
     await addDoc(collection(db, "encuestas"), respuestaData);
 
-    alert("¡Muchas gracias! Tu respuesta anónima ha sido registrada.");
+    mostrarPopupExito();
     form.reset();
-    
+
     // Ocultar las ramas condicionales al reiniciar el formulario
     actualizarRamaActiva('');
-    
+
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Enviar Encuesta Anónima';
   } catch (error) {

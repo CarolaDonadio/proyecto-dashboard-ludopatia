@@ -173,6 +173,91 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* --- Popup de confirmación --- */
+.success-popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 1000;
+}
+
+.success-popup-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.success-popup {
+  width: min(100%, 440px);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px 24px 20px;
+  border-top: 8px solid #f59e0b;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.22);
+  text-align: center;
+}
+
+.success-popup-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #fff7ed;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+}
+
+.success-popup h3 {
+  margin: 0 0 12px;
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.success-popup p {
+  margin: 0 0 14px;
+  color: var(--text-muted);
+  font-size: 0.96rem;
+}
+
+.success-popup-warning {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  border-left: 5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 14px 12px;
+  color: #9a4d00;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: left;
+  margin: 12px 0 14px;
+  font-weight: 600;
+}
+
+.success-popup-contact {
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 8px;
+}
+
+.success-popup-contact a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.btn-close-popup {
+  margin-top: 10px;
+  background-color: var(--primary);
+  width: 100%;
+}
+
 /* --- Layout del Dashboard --- */
 .dashboard-header {
   display: flex;
